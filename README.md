@@ -1,5 +1,7 @@
 # Guide: Setting Up a Steam Library via iSCSI on NAS (Linux)
 
+> ⚠️ Why this guide? Steam on Linux does **not** support CIFS/SMB network mounts for game library folders due to permission and execution limitations. If you try to add a network share via Samba, Steam will reject it. The only reliable workaround is using an iSCSI volume, which appears to the system as a local disk. This guide shows you how.
+
 ## Requirements
 
 * NAS with iSCSI support (e.g., Synology, TrueNAS)
@@ -8,6 +10,18 @@
 * `open-iscsi` package installed
 * Recommended filesystem: ext4
 * Optional: Space Reclamation (`fstrim`) for Thin Provisioning
+
+---
+
+## ⚠️ Potential Risks & Notes
+
+* 🔌 If the NAS is not available during boot, the mount may fail. Use `_netdev` or systemd dependencies to ensure proper timing.
+* ❌ Avoid using `CIFS/SMB` shares with Steam – they will not work.
+* 💾 Do not dual-mount your iSCSI volume on multiple machines – this can corrupt the file system.
+* 🔒 Use CHAP authentication to avoid exposing your storage to the network.
+* ⚠️ iSCSI uses raw block-level access. A sudden shutdown or disconnect can risk data loss if not cleanly unmounted.
+* 🧠 Always backup your Steam library or be ready to re-download games in case of filesystem or network issues.
+* ⚡ Use a wired connection (1GbE or faster) to ensure stable game loading performance.
 
 ---
 
