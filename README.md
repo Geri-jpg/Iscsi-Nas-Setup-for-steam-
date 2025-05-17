@@ -68,8 +68,8 @@ sudo iscsiadm -m discovery -t sendtargets -p <NAS-IP>
 
 # Set CHAP credentials
 sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.session.auth.authmethod -v CHAP
-sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.session.auth.username -v steamuser
-sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.session.auth.password -v SuperSecure123
+sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.session.auth.username -v <CHAP USERNAME>
+sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.session.auth.password -v <CHAP PASSWORD>
 
 # Enable auto-login
 sudo iscsiadm -m node -T <iqn> -p <NAS-IP> --op=update -n node.startup -v automatic
